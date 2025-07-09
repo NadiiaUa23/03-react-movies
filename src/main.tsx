@@ -1,7 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import "modern-normalize/modern-normalize.css";
+import "modern-normalize";
+import "./global.css";
 import App from "../src/App/App";
 
 createRoot(document.getElementById("root")!).render(
