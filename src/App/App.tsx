@@ -1,11 +1,20 @@
+import SearchBar from "../SearchBar/SearchBar";
+import { useEffect } from "react";
+import { fetchMovies } from "../services/movieService";
+
 import "./App.module.css";
 
-function App() {
+export default function App() {
+  useEffect(() => {
+    fetchMovies("batman")
+      .then((movies) => console.log("Фільми:", movies))
+      .catch((error) => console.error("Помилка:", error));
+  }, []);
+
   return (
     <>
-      <p>holla</p>
+      {/* <SearchBar /> */}
+      <div>🎬 React Movies</div>
     </>
   );
 }
-
-export default App;
