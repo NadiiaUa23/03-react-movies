@@ -1,24 +1,20 @@
+// import type { MoviesHttpResponse } from "../types/movie";
 import css from "./MovieGrid.module.css";
 
-function MovieGrid() {
+export default function MovieGrid({ id }: { id: number }) {
   return (
     <ul className={css.grid}>
-      {/* Набір елементів списку з фільмами */}{" "}
-      <li>
-        {" "}
+      <li key={id}>
         <div className={css.card}>
-          {" "}
           <img
             className={css.image}
             src="https://image.tmdb.org/t/p/w500/poster-path"
             alt="movie title"
             loading="lazy"
           />
-          <h2 className={css.title}>Movie title</h2>{" "}
-        </div>{" "}
+          <h2 className={css.title}>Movie title</h2>
+        </div>
       </li>
     </ul>
   );
 }
-
-export default MovieGrid;

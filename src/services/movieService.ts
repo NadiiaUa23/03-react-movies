@@ -14,6 +14,7 @@ export const fetchMovies = async (query: string): Promise<Movie[]> => {
       Authorization: `Bearer ${TOKEN}`,
     },
   });
+  console.log(response);
 
   return response.data.results;
 };

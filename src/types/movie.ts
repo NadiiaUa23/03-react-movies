@@ -1,3 +1,4 @@
+//Ось як буде виглядати інтерфейс для типізації одного фільму
 export interface Movie {
   id: number;
   poster_path: string;
@@ -7,7 +8,7 @@ export interface Movie {
   release_date: string;
   vote_average: number;
 }
-
+//описує об/єкт відповіді від API
 export interface MoviesHttpResponse {
   results: Movie[];
 }
