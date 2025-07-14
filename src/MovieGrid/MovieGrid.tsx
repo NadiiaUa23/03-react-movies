@@ -1,10 +1,10 @@
 // import type { MoviesHttpResponse } from "../types/movie";
 import css from "./MovieGrid.module.css";
 
-export default function MovieGrid({ id }: { id: number }) {
+export default function MovieGrid() {
   return (
     <ul className={css.grid}>
-      <li key={id}>
+      <li>
         <div className={css.card}>
           <img
             className={css.image}
