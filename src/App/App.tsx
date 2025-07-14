@@ -1,19 +1,16 @@
 import SearchBar from "../SearchBar/SearchBar";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { fetchMovies } from "../services/movieService";
+import type { Movie } from "../types/movie";
+import type { MoviesHttpResponse } from "../types/movie";
+import axios from "axios";
 
 import "./App.module.css";
 
 export default function App() {
-  useEffect(() => {
-    fetchMovies("batman")
-      .then((movies) => console.log("Фільми:", movies))
-      .catch((error) => console.error("Помилка:", error));
-  }, []);
-
   return (
     <>
-      {/* <SearchBar /> */}
+      <SearchBar />
       <div>🎬 React Movies</div>
     </>
   );
