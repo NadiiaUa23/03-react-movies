@@ -1,5 +1,4 @@
 import "./App.module.css";
-import axios from "axios";
 import SearchBar from "../SearchBar/SearchBar";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -8,14 +7,16 @@ import type { Movie } from "../types/movie";
 import { useState } from "react";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import MovieGrid from "../MovieGrid/MovieGrid";
-// import MovieGrid from "../MovieGrid/MovieGrid";
+import Loader from "../Loader/Loader";
 
 export default function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSearch = async (query: string) => {
     try {
+      setLoading(true);
       setError(false);
       setMovies([]);
 
@@ -29,6 +30,8 @@ export default function App() {
     } catch (error) {
       setError(true);
       toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -37,7 +40,10 @@ export default function App() {
       <SearchBar onSubmit={handleSearch} />
       {error && <ErrorMessage />}
       <Toaster position="bottom-right" reverseOrder={false} />
-      <MovieGrid movies={movies} onSelect={(movie) => console.log(movie)} />
+      {loading && <Loader />}
+      {!loading && !error && movies.length > 0 && (
+        <MovieGrid movies={movies} onSelect={(movie) => console.log(movie)} />
+      )}
     </>
   );
 }
