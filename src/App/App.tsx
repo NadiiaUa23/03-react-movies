@@ -7,6 +7,7 @@ import { fetchMovies } from "../services/movieService";
 import type { Movie } from "../types/movie";
 import { useState } from "react";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import MovieGrid from "../MovieGrid/MovieGrid";
 // import MovieGrid from "../MovieGrid/MovieGrid";
 
 export default function App() {
@@ -36,6 +37,7 @@ export default function App() {
       <SearchBar onSubmit={handleSearch} />
       {error && <ErrorMessage />}
       <Toaster position="bottom-right" reverseOrder={false} />
+      <MovieGrid movies={movies} onSelect={(movie) => console.log(movie)} />
     </>
   );
 }
