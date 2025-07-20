@@ -2,7 +2,7 @@ import "./App.module.css";
 import SearchBar from "../SearchBar/SearchBar";
 import { Toaster } from "react-hot-toast";
 // import axios from "axios";
-import { fetchMovies } from "../services/movieService";
+// import { fetchMovies } from "../services/movieService";
 // import type { Movie } from "../types/movie";
 // import { useState } from "react";
 // import MovieGrid from "../MovieGrid/MovieGrid";
@@ -10,16 +10,8 @@ import { fetchMovies } from "../services/movieService";
 export default function App() {
   // const [movies, setMuvies] = useState<Movie[]>([]);
 
-  const handleSearch = (searchMovies : string) => {
-    console.log('Holla: ${searchMovies}');
-    
-  };
-
-  
-  // async (query: string) => {
-  //   const response = await fetchMovies(query);
-  //   console.log(response);
-    // setMuvies(response);
+  const handleSearch = (searchQuery: string) => {
+    console.log(`Searching for: ${searchQuery}`);
   };
 
   return (
