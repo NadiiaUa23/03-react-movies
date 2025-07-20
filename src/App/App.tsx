@@ -10,9 +10,15 @@ import { fetchMovies } from "../services/movieService";
 export default function App() {
   // const [movies, setMuvies] = useState<Movie[]>([]);
 
-  const handleSearch = async (query: string) => {
-    const response = await fetchMovies(query);
-    console.log(response);
+  const handleSearch = (searchMovies : string) => {
+    console.log('Holla: ${searchMovies}');
+    
+  };
+
+  
+  // async (query: string) => {
+  //   const response = await fetchMovies(query);
+  //   console.log(response);
     // setMuvies(response);
   };
 
