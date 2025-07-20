@@ -1,24 +1,40 @@
 import "./App.module.css";
+import axios from "axios";
 import SearchBar from "../SearchBar/SearchBar";
-import { Toaster } from "react-hot-toast";
-// import axios from "axios";
-// import { fetchMovies } from "../services/movieService";
-// import type { Movie } from "../types/movie";
-// import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+
+import { fetchMovies } from "../services/movieService";
+import type { Movie } from "../types/movie";
+import { useState } from "react";
 // import MovieGrid from "../MovieGrid/MovieGrid";
 
 export default function App() {
-  // const [movies, setMuvies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [error, setError] = useState(false);
 
-  const handleSearch = (searchQuery: string) => {
-    console.log(`Searching for: ${searchQuery}`);
+  const handleSearch = async (query: string) => {
+    try {
+      setError(false);
+      setMovies([]);
+
+      const results = await fetchMovies(query);
+      console.log("Отримані фільми:", results);
+      if (results.length === 0) {
+        toast("No movies found for your request.");
+        return;
+      }
+      setMovies(results);
+    } catch (error) {
+      setError(true);
+      toast.error("Something went wrong");
+    }
   };
 
   return (
     <>
       <SearchBar onSubmit={handleSearch} />
+      {error && <p>There was an error, please try again...</p>}
       <Toaster position="bottom-right" reverseOrder={false} />
-      {/* {movies.length > 0 && <MovieGrid movies={movies} />} */}
     </>
   );
 }
