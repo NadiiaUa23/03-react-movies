@@ -6,6 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { fetchMovies } from "../services/movieService";
 import type { Movie } from "../types/movie";
 import { useState } from "react";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 // import MovieGrid from "../MovieGrid/MovieGrid";
 
 export default function App() {
@@ -33,7 +34,7 @@ export default function App() {
   return (
     <>
       <SearchBar onSubmit={handleSearch} />
-      {error && <p>There was an error, please try again...</p>}
+      {error && <ErrorMessage />}
       <Toaster position="bottom-right" reverseOrder={false} />
     </>
   );
