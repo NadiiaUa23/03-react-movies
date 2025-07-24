@@ -1,6 +1,12 @@
+import type { Movie } from "../types/movie";
 import css from "./MovieModal.module.css";
 
-function MovieModal() {
+interface MovieModalProps {
+  movie: Movie;
+  onClose: () => void;
+}
+
+function MovieModal({ movie, onClose }: MovieModalProps) {
   return (
     <div className={css.backdrop} role="dialog" aria-modal="true">
       <div className={css.modal}>

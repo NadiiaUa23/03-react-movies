@@ -8,26 +8,27 @@ import { useState } from "react";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import MovieGrid from "../MovieGrid/MovieGrid";
 import Loader from "../Loader/Loader";
+import MovieModal from "../MovieModal/MovieModal";
 
 export default function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
   const handleSearch = async (query: string) => {
     try {
-      setLoading(true);
       setError(false);
+      setLoading(true);
       setMovies([]);
 
       const results = await fetchMovies(query);
-      console.log("Отримані фільми:", results);
       if (results.length === 0) {
         toast("No movies found for your request.");
         return;
       }
       setMovies(results);
-    } catch (error) {
+    } catch {
       setError(true);
       toast.error("Something went wrong");
     } finally {
@@ -42,7 +43,16 @@ export default function App() {
       <Toaster position="bottom-right" reverseOrder={false} />
       {loading && <Loader />}
       {!loading && !error && movies.length > 0 && (
-        <MovieGrid movies={movies} onSelect={(movie) => console.log(movie)} />
+        <MovieGrid
+          movies={movies}
+          onSelect={(movie) => setSelectedMovie(movie)}
+        />
+      )}
+      {selectedMovie && (
+        <MovieModal
+          movie={selectedMovie}
+          onClose={() => setSelectedMovie(null)}
+        />
       )}
     </>
   );
