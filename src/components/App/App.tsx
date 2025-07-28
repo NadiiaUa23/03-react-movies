@@ -2,8 +2,8 @@ import "./App.module.css";
 import SearchBar from "../SearchBar/SearchBar";
 import toast, { Toaster } from "react-hot-toast";
 
-import { fetchMovies } from "../services/movieService";
-import type { Movie } from "../types/movie";
+import { fetchMovies } from "../../services/movieService";
+import type { Movie } from "../../types/movie";
 import { useState } from "react";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import MovieGrid from "../MovieGrid/MovieGrid";
