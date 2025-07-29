@@ -8,7 +8,3 @@ export interface Movie {
   release_date: string;
   vote_average: number;
 }
-//описує об/єкт відповіді від API
-export interface MoviesHttpResponse {
-  results: Movie[];
-}
