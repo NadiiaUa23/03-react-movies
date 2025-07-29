@@ -1,69 +1,106 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+# 🎬 03-React-Movies
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Опис проєкту
+Застосунок для пошуку фільмів за ключовим словом, що отримує дані з **TMDB API**.  
+Проєкт створено за допомогою **Vite + React + TypeScript**.  
+Розгорнуто на **Vercel**.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠 Використані технології
+- **React** + **TypeScript**
+- **Axios** – для HTTP-запитів
+- **React Hot Toast** – для повідомлень
+- **CSS Modules** – стилізація
+- **modern-normalize** – уніфікація стилів
+- **createPortal** – для модального вікна
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 📂 Структура проєкту
+src/
+├── components/
+│ ├── SearchBar/
+│ ├── MovieGrid/
+│ ├── Loader/
+│ ├── ErrorMessage/
+│ └── MovieModal/
+├── services/
+│ └── movieService.ts
+├── types/
+│ └── movie.ts
+├── App.tsx
+└── main.tsx
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+🧩 Компоненти
+SearchBar
+Приймає проп onSubmit(query: string)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Реалізовано через Form Actions
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Використовує toast для повідомлень, якщо інпут пустий
+
+MovieGrid
+Приймає movies: Movie[] та onSelect(movie: Movie)
+
+Рендерить список карток фільмів
+
+Використовує заглушку, якщо постера немає
+
+Loader
+Відображає текст:
+
+Loading movies, please wait...
+
+ErrorMessage
+Відображає текст:
+There was an error, please try again...
+MovieModal
+Приймає movie: Movie та onClose()
+
+Використовує createPortal
+
+Відображає:
+
+фон backdrop_path (або заглушку, якщо немає)
+
+назву, опис, дату виходу, рейтинг
+
+Закривається:
+
+по ESC
+
+при кліку на фон
+
+по кнопці ×
+
+Очищає слухачі подій і повертає скрол
+
+🚀 Деплой на Vercel
+У налаштуваннях Environment Variables додано:
+VITE_TMDB_TOKEN=your_tmdb_token
+Після збереження змін виконано Redeploy.
+
+✅ Результат
+Пошук працює, фільми відображаються
+
+Модалка показує реальні дані
+
+Помилки обробляються toast та ErrorMessage
+
+Токен безпечно зберігається у .env
+
+🧠 Що я вивчила під час цієї роботи
+Як працювати з Form Actions у React
+
+Як робити HTTP-запити з axios та типізувати їх
+
+Використання createPortal для модальних вікон
+
+Робота з .env у Vite і налаштування змінних на Vercel
+
+Як обробляти помилки і показувати fallback для зображень
