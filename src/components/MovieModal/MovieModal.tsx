@@ -33,6 +33,10 @@ function MovieModal({ movie, onClose }: MovieModalProps) {
     }
   };
 
+  const imageUrl = movie.backdrop_path
+    ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
+    : `https://via.placeholder.com/1280x720?text=${movie.title}`;
+
   return createPortal(
     <div
       className={css.backdrop}
@@ -48,19 +52,16 @@ function MovieModal({ movie, onClose }: MovieModalProps) {
         >
           &times;
         </button>
-        <img
-          src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-          alt={movie.title}
-          className={css.image}
-        />
+        <img src={imageUrl} alt={movie.title} className={css.image} />
         <div className={css.content}>
-          <h2>movie_title</h2>
-          <p>movie_overview</p>
+          <h2>{movie.title}</h2>
+          <p>{movie.overview || "No description available."}</p>
           <p>
-            <strong>Release Date:</strong> movie_release_date
+            <strong>Release Date:</strong> {movie.release_date || "N/A"}
           </p>
           <p>
-            <strong>Rating:</strong> movie_vote_average/10
+            <strong>Rating:</strong>
+            {movie.vote_average ? `${movie.vote_average}/10` : "N/A"}
           </p>
         </div>
       </div>
